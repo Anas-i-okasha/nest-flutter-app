@@ -1,11 +1,6 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-<<<<<<< HEAD
-
-@Module({
-  imports: [],
-=======
 import { ConfigModule } from '@nestjs/config'; // will load and parse .env file use --npm i --save @nestjs/config-- to install it
 import { UserModule } from './user/user.module';
 import { LoginModule } from './login/login.module';
@@ -30,7 +25,6 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       synchronize: false,
     }),
   ],
->>>>>>> master
   controllers: [AppController],
   providers: [AppService],
 })
