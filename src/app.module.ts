@@ -6,6 +6,7 @@ import { UserModule } from './user/user.module';
 import { LoginModule } from './login/login.module';
 import { RegisterModule } from './register/register.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { RedisService } from './redis/redis.service';
 
 @Module({
   // eslint-disable-next-line prettier/prettier
@@ -26,6 +27,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
     }),
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, RedisService],
+  exports: [RedisService],
 })
 export class AppModule {}
