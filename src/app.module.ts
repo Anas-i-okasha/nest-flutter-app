@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { join } from 'path';
 import { ConfigModule } from '@nestjs/config'; // will load and parse .env file use --npm i --save @nestjs/config-- to install it
 import { UserModule } from './user/user.module';
 import { LoginModule } from './login/login.module';
@@ -22,8 +23,8 @@ import { RedisService } from './redis/redis.service';
       username: process.env.DB_USERNAME,
       password: process.env.DB_PASSWORD,
       database: process.env.DB_NAME,
-      entities: [],
-      synchronize: false,
+      entities: [join(__dirname, '**', '*.entity.{ts,js}')],
+      synchronize: true,
     }),
   ],
   controllers: [AppController],
