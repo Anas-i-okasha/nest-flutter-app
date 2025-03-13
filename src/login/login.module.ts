@@ -3,7 +3,7 @@ import { LoginService } from './login.service';
 import { LoginController } from './login.controller';
 
 @Module({
-  controllers: [LoginController],
-  providers: [LoginService],
+	controllers: [LoginController],
+	providers: [LoginService],
 })
 export class LoginModule {}
