@@ -10,25 +10,25 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { RedisService } from './redis/redis.service';
 
 @Module({
-  // eslint-disable-next-line prettier/prettier
-  imports: [
-    ConfigModule.forRoot(),
-    UserModule,
-    LoginModule,
-    RegisterModule,
-    TypeOrmModule.forRoot({
-      type: 'postgres',
-      host: process.env.DB_HOST,
-      port: parseInt(process.env.DB_PORT, 10),
-      username: process.env.DB_USERNAME,
-      password: process.env.DB_PASSWORD,
-      database: process.env.DB_NAME,
-      entities: [join(__dirname, '**', '*.entity.{ts,js}')],
-      synchronize: true,
-    }),
-  ],
-  controllers: [AppController],
-  providers: [AppService, RedisService],
-  exports: [RedisService],
+	// eslint-disable-next-line prettier/prettier
+	imports: [
+		ConfigModule.forRoot(),
+		UserModule,
+		LoginModule,
+		RegisterModule,
+		TypeOrmModule.forRoot({
+			type: 'postgres',
+			host: process.env.DB_HOST,
+			port: parseInt(process.env.DB_PORT, 10),
+			username: process.env.DB_USERNAME,
+			password: process.env.DB_PASSWORD,
+			database: process.env.DB_NAME,
+			entities: [join(__dirname, '**', '*.entity.{ts,js}')],
+			synchronize: true,
+		}),
+	],
+	controllers: [AppController],
+	providers: [AppService, RedisService],
+	exports: [RedisService],
 })
 export class AppModule {}
