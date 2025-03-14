@@ -21,3 +21,5 @@ export class RegisterDto {
 	@MaxLength(255)
 	password: string;
 }
+
+export class LoginDto {}
