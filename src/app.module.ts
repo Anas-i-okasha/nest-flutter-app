@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { join } from 'path';
@@ -8,6 +8,7 @@ import { LoginModule } from './login/login.module';
 import { RegisterModule } from './register/register.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { RedisService } from './redis/redis.service';
+import { LoggerMiddleware } from './middleware/logger.middleware';
 
 @Module({
 	// eslint-disable-next-line prettier/prettier
@@ -23,7 +24,6 @@ import { RedisService } from './redis/redis.service';
 			username: process.env.DB_USERNAME,
 			password: process.env.DB_PASSWORD,
 			database: process.env.DB_NAME,
-			entities: [join(__dirname, '**', '*.entity.{ts,js}')],
 			synchronize: true,
 		}),
 	],
@@ -31,4 +31,8 @@ import { RedisService } from './redis/redis.service';
 	providers: [AppService, RedisService],
 	exports: [RedisService],
 })
-export class AppModule {}
+export class AppModule implements NestModule {
+	configure(consumer: MiddlewareConsumer) {
+		consumer.apply(LoggerMiddleware).forRoutes('*'); // Apply globally for all routes
+	}
+}
