@@ -1,7 +1,6 @@
 import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { join } from 'path';
 import { ConfigModule } from '@nestjs/config'; // will load and parse .env file use --npm i --save @nestjs/config-- to install it
 import { UserModule } from './user/user.module';
 import { LoginModule } from './login/login.module';
@@ -12,7 +11,6 @@ import { LoggerMiddleware } from './middleware/logger.middleware';
 import { User } from './entity/user.entity';
 
 @Module({
-	// eslint-disable-next-line prettier/prettier
 	imports: [
 		ConfigModule.forRoot(),
 		UserModule,

@@ -22,4 +22,14 @@ export class RegisterDto {
 	password: string;
 }
 
-export class LoginDto {}
+export class LoginDto {
+	@IsEmail()
+	@IsNotEmpty()
+	@MaxLength(255)
+	email: string;
+
+	@IsString()
+	@IsNotEmpty()
+	@MaxLength(255)
+	password: string;
+}
