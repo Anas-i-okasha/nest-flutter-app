@@ -24,12 +24,12 @@ export class User {
 	@Column({ type: 'character varying', length: 255, nullable: false })
 	password: string;
 
-	@CreateDateColumn({ type: 'time without time zone' })
+	@CreateDateColumn({ type: 'timestamp without time zone', default: new Date()})
 	created_at: Date;
 
-	@UpdateDateColumn({ type: 'time without time zone' })
+	@UpdateDateColumn({ type: 'timestamp without time zone' })
 	updated_at: Date;
 
-	@DeleteDateColumn({ type: 'time without time zone' })
+	@DeleteDateColumn({ type: 'timestamp without time zone' })
 	deleted_at: Date;
 }
