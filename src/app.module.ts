@@ -9,6 +9,7 @@ import { RegisterModule } from './register/register.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { RedisService } from './redis/redis.service';
 import { LoggerMiddleware } from './middleware/logger.middleware';
+import { User } from './entity/user.entity';
 
 @Module({
 	// eslint-disable-next-line prettier/prettier
@@ -24,6 +25,7 @@ import { LoggerMiddleware } from './middleware/logger.middleware';
 			username: process.env.DB_USERNAME,
 			password: process.env.DB_PASSWORD,
 			database: process.env.DB_NAME,
+			entities: [User],
 			synchronize: true,
 		}),
 	],
