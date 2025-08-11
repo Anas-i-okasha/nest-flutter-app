@@ -86,6 +86,10 @@ export class RegisterService {
 	}
 
 	private async generateJWT(payload: JwtPayload): Promise<AccessToken> {
-		return await this.jwtService.sign(payload, { secret: process.env.JWT_SECRET_KEY, expiresIn: process.env.JWT_EXPIRY_IN});
+        try {
+		    return await this.jwtService.sign(payload, { secret: process.env.JWT_SECRET_KEY, expiresIn: process.env.JWT_EXPIRY_IN});
+        } catch(ex) {
+            console.log(ex, 'generateJWT');
+        }
 	}
 }
