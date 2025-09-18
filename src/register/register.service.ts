@@ -6,6 +6,7 @@ import { Repository } from 'typeorm';
 import * as bcrypt from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
 import { AccessToken, JwtPayload } from 'src/utility/types';
+import { RedisService } from 'src/redis/redis.service';
 
 @Injectable()
 export class RegisterService {
@@ -13,6 +14,7 @@ export class RegisterService {
 		@InjectRepository(User)
 		private readonly userRepository: Repository<User>,
 		private readonly jwtService: JwtService,
+		private readonly redisService: RedisService,
 	) {}
 
 	/**
@@ -79,6 +81,8 @@ export class RegisterService {
 				id: userInfo.id,
 			});
 
+			await this.redisService.set('login', accessToken);
+
 			return { token: accessToken };
 		} catch (err) {
 			console.log('login', err);
@@ -86,10 +90,13 @@ export class RegisterService {
 	}
 
 	private async generateJWT(payload: JwtPayload): Promise<AccessToken> {
-        try {
-		    return await this.jwtService.sign(payload, { secret: process.env.JWT_SECRET_KEY, expiresIn: process.env.JWT_EXPIRY_IN});
-        } catch(ex) {
-            console.log(ex, 'generateJWT');
-        }
+		try {
+			return await this.jwtService.sign(payload, {
+				secret: process.env.JWT_SECRET_KEY,
+				expiresIn: process.env.JWT_EXPIRY_IN,
+			});
+		} catch (ex) {
+			console.log(ex, 'generateJWT');
+		}
 	}
 }
