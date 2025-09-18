@@ -9,6 +9,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { RedisService } from './redis/redis.service';
 import { LoggerMiddleware } from './middleware/logger.middleware';
 import { User } from './entity/user.entity';
+import { ChatGateway } from './chat/chat.gateway';
 
 @Module({
 	imports: [
@@ -28,7 +29,7 @@ import { User } from './entity/user.entity';
 		}),
 	],
 	controllers: [AppController],
-	providers: [AppService, RedisService],
+	providers: [AppService, RedisService, ChatGateway],
 	exports: [RedisService],
 })
 export class AppModule implements NestModule {
