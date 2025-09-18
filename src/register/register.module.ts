@@ -4,6 +4,7 @@ import { RegisterController } from './register.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from 'src/entity/user.entity';
 import { JwtModule, JwtService } from '@nestjs/jwt';
+import { RedisService } from 'src/redis/redis.service';
 
 @Module({
 	imports: [
@@ -14,6 +15,6 @@ import { JwtModule, JwtService } from '@nestjs/jwt';
 		}),
 	],
 	controllers: [RegisterController],
-	providers: [RegisterService, JwtService],
+	providers: [RegisterService, JwtService, RedisService],
 })
 export class RegisterModule {}
